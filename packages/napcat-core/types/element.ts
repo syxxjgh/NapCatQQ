@@ -335,6 +335,77 @@ export interface PttElement {
   };
 }
 
+export interface WalletReceiver {
+  background?: number;
+  icon?: number;
+  title: string;       // 祝福语/点歌内容，如 "点歌 我欲成仙"
+  subTitle?: string;    // "赶紧点击拆开吧"
+  content?: string;     // "QQ红包"
+  linkUrl?: string;
+  blackStripe?: string;
+  notice?: string;      // "[QQ红包]点歌 我欲成仙"
+  titleColor?: number;
+  subtitleColor?: number;
+  actionsPriority?: string;
+  jumpUrl?: string;
+  nativeIOS?: string;
+  nativeAndroid?: string;
+  iconUrl?: string;
+  contentColor?: number;
+  contentBgcolor?: number;
+  aioImageLeft?: string;
+  aioImageRight?: string;
+  cftImage?: string;
+  pbReserve?: Record<string, unknown>;
+}
+
+export interface WalletSender {
+  background?: number;
+  icon?: number;
+  title?: string;
+  subTitle?: string;
+  content?: string;
+  linkUrl?: string;
+  blackStripe?: string;
+  notice?: string;
+  titleColor?: number;
+  subtitleColor?: number;
+  actionsPriority?: string;
+  jumpUrl?: string;
+  nativeIOS?: string;
+  nativeAndroid?: string;
+  iconUrl?: string;
+  contentColor?: number;
+  contentBgcolor?: number;
+  aioImageLeft?: string;
+  aioImageRight?: string;
+  cftImage?: string;
+  pbReserve?: Record<string, unknown>;
+}
+
+export interface WalletElement {
+  sendUin?: string;
+  sender?: WalletSender;
+  receiver?: WalletReceiver;
+  channelId?: number;
+  templateId?: number;
+  resend?: number;
+  msgPriority?: number;
+  redType: number;       // 红包类型: 1 = 普通/拼手气现金红包
+  billNo: string;        // 红包单号
+  authkey?: string;      // 鉴权key
+  sessiontype?: number;
+  msgType?: number;      // 3 = 普通/拼手气, 8 = 专属红包
+  envelopeId?: number;
+  name?: string;
+  confType?: number;
+  msgFrom?: number;
+  redChannel?: number;   // 1 = 普通, 1024 = 专属
+  grapUin?: string[];    // 专属红包指定领取人 QQ 号列表
+  grabState?: number;
+  grabbedAmount?: string;
+}
+
 export type SendRecommendedMsgElement = SendElementBase<ElementType.RECOMMENDEDMSG> & ElementBase<'recommendedMsgElement'>;
 
 export type SendTaskTopMsgElement = SendElementBase<ElementType.TASKTOPMSG> & ElementBase<'taskTopMsgElement'>;
@@ -351,7 +422,7 @@ export type SendYoloGameResultElement = SendElementBase<ElementType.YOLOGAMERESU
 
 export type SendGiphyElement = SendElementBase<ElementType.GIPHY> & ElementBase<'giphyElement'>;
 
-export type SendWalletElement = SendElementBase<ElementType.UNKNOWN> & ElementBase<'walletElement'>;
+export type SendWalletElement = SendElementBase<ElementType.WALLET> & ElementBase<'walletElement'>;
 
 export type SendCalendarElement = SendElementBase<ElementType.CALENDAR> & ElementBase<'calendarElement'>;
 

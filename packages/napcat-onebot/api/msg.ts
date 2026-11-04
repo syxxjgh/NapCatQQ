@@ -622,6 +622,19 @@ export class OneBotMsgApi {
         };
       }
     },
+
+    walletElement: async (element) => {
+      const receiver = element?.receiver;
+      const title = receiver?.title || receiver?.notice || 'QQ红包';
+      const isExclusive = element.msgType === 8 || (element.grapUin && element.grapUin.length > 0);
+      const prefix = isExclusive ? '[QQ专属红包]' : '[QQ红包]';
+      return {
+        type: OB11MessageDataType.text,
+        data: {
+          text: `${prefix} ${title}`,
+        },
+      };
+    },
   };
 
   ob11ToRawConverters: Ob11ToRawConverters = {

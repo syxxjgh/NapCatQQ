@@ -315,6 +315,13 @@ function msgElementToText (element: MessageElement, msg: RawMessage, recursiveLe
     return '[转发消息]';
   }
 
+  if (element.walletElement || element.elementType === ElementType.WALLET) {
+    const receiver = element.walletElement?.receiver;
+    const title = receiver?.title || receiver?.notice || 'QQ红包';
+    const isExclusive = element.walletElement?.msgType === 8 || (element.walletElement?.grapUin && element.walletElement.grapUin.length > 0);
+    return isExclusive ? `[专属红包 ${title}]` : `[红包 ${title}]`;
+  }
+
   if (element.elementType === ElementType.GreyTip) {
     return '[灰条消息]';
   } else if (element.elementType === ElementType.FILE) {

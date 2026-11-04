@@ -1,5 +1,5 @@
 import { NTGroupMemberRole } from './group';
-import { ActionBarElement, ArkElement, AvRecordElement, CalendarElement, FaceBubbleElement, FaceElement, FileElement, GiphyElement, GrayTipElement, MarketFaceElement, PicElement, PttElement, RecommendedMsgElement, ReplyElement, ShareLocationElement, StructLongMsgElement, TaskTopMsgElement, TextElement, TofuRecordElement, VideoElement, YoloGameResultElement } from './element';
+import { ActionBarElement, ArkElement, AvRecordElement, CalendarElement, FaceBubbleElement, FaceElement, FileElement, GiphyElement, GrayTipElement, MarketFaceElement, PicElement, PttElement, RecommendedMsgElement, ReplyElement, ShareLocationElement, StructLongMsgElement, TaskTopMsgElement, TextElement, TofuRecordElement, VideoElement, WalletElement, YoloGameResultElement } from './element';
 
 /*
  * 2024/11/22 Refactor Mlikiowa
@@ -170,7 +170,7 @@ export interface MessageElement {
   structLongMsgElement?: StructLongMsgElement,
   multiForwardMsgElement?: MultiForwardMsgElement,
   giphyElement?: GiphyElement,
-  walletElement?: null,
+  walletElement?: WalletElement,
   inlineKeyboardElement?: InlineKeyboardElement,
   textGiftElement?: null, // ????
   calendarElement?: CalendarElement,
