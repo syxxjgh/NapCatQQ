@@ -1,0 +1,46 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    # UTC 21:00 = 北京时间每天 05:00（GitHub 定时任务可能有分钟级延迟，属正常现象）
+    - cron: '0 21 * * *'
+  workflow_dispatch: # 允许在 Actions 页面手动触发
+
+# 同一时刻仅允许一个同步任务
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Sync upstream/main -> origin/main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fork main (full history)
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Merge upstream/main into main
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git remote add upstream https://github.com/NapNeko/NapCatQQ.git
+          git fetch upstream main
+
+          if [ "$(git rev-parse upstream/main)" = "$(git rev-parse origin/main)" ]; then
+            echo "Already in sync with upstream, nothing to do."
+            exit 0
+          fi
+
+          echo "Merging $(git rev-parse --short upstream/main) into main"
+          # -X theirs: 内容冲突时优先采用上游版本；本仓库自有文件（如本 workflow）不受影响
+          git merge upstream/main --no-edit -X theirs -m "chore: sync upstream [skip ci]"
+
+          git push origin main
